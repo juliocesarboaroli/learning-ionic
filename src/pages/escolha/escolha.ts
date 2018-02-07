@@ -1,22 +1,33 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
+import { Acessorio } from '../../domain/carro/acessorio';
+import { Carro } from '../../domain/carro/carro';
 
 @Component({
     templateUrl: 'escolha.html'
 })
 export class EscolhaPage {
 
-    public carro;
-    public acessorios;
+    public carro: Carro;
+    public acessorios: Acessorio[];
+    private _precoTotal: number;
 
     constructor(public navParams: NavParams) {
         this.carro = this.navParams.get('carroSelecionado');
+        this._precoTotal = this.carro.preco;
         this.acessorios = [
-            { descricao: 'Direção elétrica', preco: 1200 },
-            { descricao: 'Ar condicionado', preco: 780 },
-            { descricao: 'Multimídia', preco: 1020 },
-            { descricao: 'Rodas de liga leve', preco: 2300 },
-        ]
+            new Acessorio('Direção elétrica', 1200),
+            new Acessorio( 'Ar condicionado', 780),
+            new Acessorio('Multimídia', 1020),
+            new Acessorio('Rodas de liga leve', 2300)
+        ];
     }
 
+    get precoTotal() {
+        return this._precoTotal;
+    }
+
+    atualizaTotal(selecionado: boolean, acessorio) {
+        selecionado ? this._precoTotal += acessorio.preco : this._precoTotal -= acessorio.preco;
+    }
 }

@@ -3,6 +3,7 @@ import { NavController, LoadingController, AlertController } from 'ionic-angular
 import { Http } from '@angular/http';
 
 import { EscolhaPage } from '../escolha/escolha';
+import { Carro } from '../../domain/carro/carro';
 
 @Component({
   selector: 'page-home',
@@ -10,7 +11,7 @@ import { EscolhaPage } from '../escolha/escolha';
 })
 export class HomePage implements OnInit {
 
-  public carros;
+  public carros: Array<Carro>;
 
   constructor(
     public navCtrl: NavController,
